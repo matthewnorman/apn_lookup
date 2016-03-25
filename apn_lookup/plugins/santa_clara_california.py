@@ -6,6 +6,7 @@ This is for Santa Clara County, Home of San Jose,
 Silicon Valley (the Enterprise half of it at least),
 and Code for San Jose.
 """
+import lxml.html
 import requests
 
 from apn_lookup.plugins import base_plugin
@@ -54,6 +55,16 @@ class SantaClaraPlugin(base_plugin.PluginBase):
         """
 
         req = requests.get(URL, params={'parcelnumber': ID})
+        html = lxml.html.fromstring(req.text)
+        col_values_raw = html.xpath('//div[@class="col-sm-2 col-md-2"]/text()')
+        col_values = [x.strip().replace('$', '').replace(',', '')
+                      for x in col_values_raw if '$' in x]
+        first_value = float(col_values[0])
+        second_value = float(col_values[1])
+        total_tax = first_value + second_value
+        other_tax = sum([float(x) for x in col_values[2:]])
+        return {'property_tax': total_tax,
+                'other_tax': other_tax}
 
 
 
