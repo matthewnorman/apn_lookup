@@ -78,7 +78,15 @@ class TaxfinderCore():
             plugin_path = '.plugins.{}'.format(plugin_name)
             imported = importlib.import_module(name=plugin_path,
                                                package='apn_lookup')
-            print(imported)
-        
+            plugin = imported.factory()
+            plugin.setup()
+            self._plugin_cache[over_region][tax_region] = plugin
+
+        # By now we should have the plugin
+        plugin.open()
+        data = plugin.lookup(ID=ID)
+        plugin.close()
+
+        return data
 
         

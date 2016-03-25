@@ -22,6 +22,30 @@ class SantaClaraPlugin(base_plugin.PluginBase):
     and so has no need for most of the mechanics.
     """
 
+    def setup(self):
+        """
+        Do nothing.
+        """
+        pass
+
+    def teardown(self):
+        """
+        Do nothing.
+        """
+        pass
+
+    def open(self):
+        """
+        Do nothing.
+        """
+        pass
+
+    def close(self):
+        """
+        Do nothing.
+        """
+        pass
+
     def lookup(self, ID):
         """
         For Santa Clara, the ID is handled as a single,
