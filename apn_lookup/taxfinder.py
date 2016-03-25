@@ -35,6 +35,9 @@ class TaxfinderCore():
         return {
             'california': {
                 'santa clara': 'santa_clara_california'
+            },
+            'illinois': {
+                'cook': 'cook_county_illinois'
             }
         }
 
@@ -44,7 +47,7 @@ class TaxfinderCore():
         in a consistent way.
         """
         big_region = over_region.strip().lower()
-        small_region = tax_region.replace('county', '').strip().lower()
+        small_region = tax_region.lower().replace('county', '').strip()
         return small_region, big_region
 
     def get_property_info(self, ID, tax_region, over_region):
