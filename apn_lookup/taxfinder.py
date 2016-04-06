@@ -34,7 +34,8 @@ class TaxfinderCore():
         """
         return {
             'california': {
-                'santa clara': 'santa_clara_california'
+                'santa clara': 'santa_clara_california',
+                'san mateo': 'san_mateo_california'
             },
             'illinois': {
                 'cook': 'cook_county_illinois'
